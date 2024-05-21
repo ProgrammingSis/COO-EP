@@ -7,6 +7,16 @@ import java.awt.*;
 
 public class Player {
 
+	private Color sxd ;
+	private double cx;
+	private double cy;
+	private double width;
+	private double centroAltura;
+	private double centroLargura;
+	private double height;
+	private double velocidade;
+	private String id;
+
 	/**
 		Construtor da classe Player.
 
@@ -19,17 +29,6 @@ public class Player {
 		param v_limit um array de double contendo dois valores (em pixels) que determinam os limites verticais da área útil da quadra.
 		param speed velocidade do movimento vertical do player (em pixels por millisegundo).
 	*/
-	private Color sxd ;
-	private double cx;
-	private double cy;
-	private double width;
-	private double centroAltura;
-	private double centroLargura;
-	private double height;
-	private double velocidade;
-	private String id;
-
-
 	public Player(double cx, double cy, double width, double height, Color color, String id, double [] v_limit, double speed){
 		this.cx = cx;
 		this.cy = cy;

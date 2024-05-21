@@ -19,9 +19,19 @@ public class Ball {
 		@param color cor da bola.
 		@param speed velocidade da bola (em pixels por millisegundo).
 	*/
+	private double cx, cy, width, height, speed;
+	Color color;
+
+
 
 	public Ball(double cx, double cy, double width, double height, Color color, double speed){
-	
+		this.cx = cx;
+		this.cy = cy;
+		this.width = width;
+		this.height = height;
+		this.speed = speed;
+		this.color = color;
+
 	}
 
 
@@ -32,7 +42,7 @@ public class Ball {
 	public void draw(){
 
 		GameLib.setColor(Color.YELLOW);
-		GameLib.fillRect(400, 300, 20, 20);
+		GameLib.fillRect(width, height, cx, cy);
 	}
 
 	/**
@@ -40,7 +50,7 @@ public class Ball {
 		
 		@param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
 	*/
-
+	double delta;
 	public void update(long delta){
 
 	}
