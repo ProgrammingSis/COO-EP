@@ -6,6 +6,9 @@ import java.awt.*;
 */
 
 public class Ball {
+	private double cx, cy, width, height, speed;
+	double directionX, directionY;
+	Color color;
 
 	/**
 		Construtor da classe Ball. Observe que quem invoca o construtor desta classe define a velocidade da bola 
@@ -19,11 +22,6 @@ public class Ball {
 		@param color cor da bola.
 		@param speed velocidade da bola (em pixels por millisegundo).
 	*/
-	private double cx, cy, width, height, speed;
-	Color color;
-
-
-
 	public Ball(double cx, double cy, double width, double height, Color color, double speed){
 		this.cx = cx;
 		this.cy = cy;
@@ -31,6 +29,12 @@ public class Ball {
 		this.height = height;
 		this.speed = speed;
 		this.color = color;
+
+		double direction = Math.random()*360; // ângulo aleatório
+		double directionInRad = direction * Math.PI/180; //transformado em radiano
+
+		directionX = Math.cos(directionInRad); 
+		directionY = Math.sin(directionInRad);
 
 	}
 
@@ -50,9 +54,9 @@ public class Ball {
 		
 		@param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
 	*/
-	double delta;
 	public void update(long delta){
-
+		cx = cx + directionX * speed;
+		cy = cy + directionY * speed; 
 	}
 
 	/**
@@ -60,7 +64,6 @@ public class Ball {
 	
 		@param playerId uma string cujo conteúdo identifica um dos jogadores.
 	*/
-
 	public void onPlayerCollision(String playerId){
 
 	}
