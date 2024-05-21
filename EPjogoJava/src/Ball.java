@@ -41,8 +41,8 @@ public class Ball {
 
 	public void draw(){
 
-		GameLib.setColor(Color.YELLOW);
-		GameLib.fillRect(width, height, cx, cy);
+		GameLib.setColor(color);
+		GameLib.fillRect(cx, cy, width, height);
 	}
 
 	/**
