@@ -11,8 +11,6 @@ public class Player {
 	private double cx;
 	private double cy;
 	private double width;
-	private double centroAltura;
-	private double centroLargura;
 	private double height;
 	private double velocidade;
 	private String id;

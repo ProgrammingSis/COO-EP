@@ -36,8 +36,6 @@ public class Player {
 		this.height = height;
 		this.id = id;
 		this.velocidade = speed;
-		this.centroAltura = height/2;
-		this.centroLargura = width/2;
 		this.color = color;
 
 	}
