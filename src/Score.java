@@ -9,15 +9,14 @@ import java.awt.*;
 */
 
 public class Score {
+	String idJogador;
+	privateint score = 0;
 
 	/**
 		Construtor da classe Score.
 
 		@param playerId uma string que identifica o player ao qual este placar está associado.
 	*/
-	String idJogador;
-	int score = 0;
-
 	public Score(String playerId){
 		this.idJogador = playerId;
 	}
@@ -25,18 +24,16 @@ public class Score {
 	/**
 		Método de desenho do placar.
 	*/
-
 	public void draw(){
 
-		GameLib.drawText("placar?", 70, GameLib.ALIGN_LEFT);			
+		GameLib.drawText(this.idJogador, 70, GameLib.ALIGN_LEFT);			
 	}
 
 	/**
 		Método que incrementa em 1 unidade a contagem de pontos.
 	*/
-
 	public void inc(){
-		score++;
+		this.score++;
 	}
 
 	/**
@@ -44,9 +41,8 @@ public class Score {
 
 		@return o valor inteiro referente ao total de pontos.
 	*/
-
 	public int getScore(){
 
-		return score;
+		return this.score;
 	}
 }

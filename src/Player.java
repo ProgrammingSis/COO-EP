@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Player {
 
-	private Color sxd ;
+	private Color color;
 	private double cx;
 	private double cy;
 	private double width;
@@ -48,8 +48,8 @@ public class Player {
 
 	public void draw(){
 
-		GameLib.setColor(Color.GREEN);
-		GameLib.fillRect(80, 300, 20, 100);
+		GameLib.setColor(color);
+		GameLib.fillRect(cx, cy, width, height);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class Player {
 
 	public double getCx() { 
 		
-		return centroLargura;
+		return cx;
 	}
 
 	/**
@@ -126,7 +126,6 @@ public class Player {
 
 	public double getCy() { 
 	
-		return centroAltura;
+		return cy;
 	}
 }
-
