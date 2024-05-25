@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Score {
 	String idJogador;
-	privateint score = 0;
+	private int score = 0;
 
 	/**
 		Construtor da classe Score.
