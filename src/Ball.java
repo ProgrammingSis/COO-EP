@@ -6,10 +6,11 @@ import java.awt.*;
 */
 
 public class Ball {
-	private double cx, cy, width, height, speed;
+	private double cx, cy, width, height, speed, Xspeed, Yspeed;
 	double directionX, directionY;
 	Color color;
 
+ public double upSideWall, downSideWall;
 	/**
 		Construtor da classe Ball. Observe que quem invoca o construtor desta classe define a velocidade da bola 
 		(em pixels por millisegundo), mas não define a direção deste movimento. A direção do movimento é determinada 
@@ -36,6 +37,9 @@ public class Ball {
 		directionX = Math.cos(directionInRad); 
 		directionY = Math.sin(directionInRad);
 
+		Xspeed = this.speed;
+		Yspeed = this.speed;
+
 	}
 
 
@@ -51,12 +55,18 @@ public class Ball {
 
 	/**
 		Método chamado quando o estado (posição) da bola precisa ser atualizado.
-		
-		@param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
-	*/
+
+	 *Implementação: a posição atual da bola calculada com a fórmula S = S0 + velocidade*tempo.
+
+	 *@param delta quantidade de millisegundos que se passou entre o ciclo anterior de
+		atualização do jogo e o atual.
+	 *@param cx posição atual da bola no eixo x
+	 *@param cy posição atual da bola no eixo y
+	 * **/
 	public void update(long delta){
-		cx = cx + directionX * speed;
-		cy = cy + directionY * speed; 
+		cx = cx + Xspeed*delta;
+		cy = cy + Yspeed*delta;
+
 	}
 
 	/**
@@ -65,7 +75,7 @@ public class Ball {
 		@param playerId uma string cujo conteúdo identifica um dos jogadores.
 	*/
 	public void onPlayerCollision(String playerId){
-
+		this.Xspeed = - this.Xspeed;
 	}
 
 	/**
@@ -75,7 +85,20 @@ public class Ball {
 	*/
 
 	public void onWallCollision(String wallId){
-
+		switch (wallId) {
+			case "Left":
+			   Xspeed = Math.abs(Xspeed);
+					break;
+			case "Right":
+					Xspeed = -Math.abs(Xspeed);
+					break;
+			case "Top":
+					Yspeed = Math.abs(Yspeed);
+					break;
+			case "Bottom":
+					Yspeed = -Math.abs(Yspeed);
+					break;
+	}
 	}
 
 	/**
@@ -84,22 +107,97 @@ public class Ball {
 		@param wall referência para uma instância de Wall contra a qual será verificada a ocorrência de colisão da bola.
 		@return um valor booleano que indica a ocorrência (true) ou não (false) de colisão.
 	*/
-	
 	public boolean checkCollision(Wall wall){
+	//coordenada do lado esquerdo da bola
+	double leftSideBall = cx - width/2;
+	//coordenada do lado direito da bola
+	double rightSideBall = cx + width/2;
+	//coordenada do lado de cima da bola
+	double downSideBall = cy - height/2;
+	//coordenada do lado de baixo da bola
+	double upSideBall = cx + height/2;
 
-		return false;
+		
+		switch (wall.getId()){
+			case "Left":
+				if (leftSideBall < wall.getCx() + wall.getWidth()/2)
+						return true;
+				break;
+
+			case "Right":
+				if (rightSideBall > wall.getCx() - wall.getWidth()/2)
+						return true;
+					break;
+			case "Top":
+				if (downSideBall < wall.getCy() + wall.getHeight()/2)
+						return true;
+					break;
+			case "Bottom":
+					if (cy + height/2 > wall.getCy() - wall.getHeight()/2)
+							return true;
+					break;
 	}
-
+	return false;
+	}
+	Player playerColisao, playerHit;
 	/**
 		Método que verifica se houve colisão da bola com um jogador.
 
 		@param player referência para uma instância de Player contra o qual será verificada a ocorrência de colisão da bola.
 		@return um valor booleano que indica a ocorrência (true) ou não (false) de colisão.
 	*/	
-
 	public boolean checkCollision(Player player){
+//coordenadas da bola abaixo
 
-		return false;
+		//coordenada do lado esquerdo da bola
+		double leftSideBall = cx - width/2;
+		//coordenada do lado direito da bola
+		double rightSideBall = cx + width/2;
+		//coordenada do lado de cima da bola
+		double downSideBall = cy - height/2;
+		//coordenada do lado de baixo da bola
+		double upSideBall = cx + height/2;
+
+ // coordenadas player
+
+		double downSidePlayer = player.getCy() + player.getHeight()/2;
+
+		double upSidePlayer = player.getCy() - player.getHeight()/2;
+
+		double rightSidePlayer = player.getCx() + player.getWidth()/2;
+
+		double leftSidePlayer = player.getCx() - player.getWidth()/2;
+		
+		if (!(downSideBall < downSidePlayer && cy + height/2 > player.getCy() - player.getHeight()/2))
+			return false;
+
+switch (player.getId()) {
+	case "Player 1":
+		if (leftSideBall < rightSidePlayer && leftSidePlayer < rightSideBall){
+
+			if(upSideBall < upSidePlayer && downSideBall > downSidePlayer)
+				return true;
+
+			if(Xspeed > 0 )
+				return false;
+
+			return true;
+		}
+					
+		case "Player 2":
+			if (rightSideBall > leftSidePlayer && rightSidePlayer > leftSideBall){
+
+				if(upSideBall < upSidePlayer && downSideBall > downSidePlayer)
+					return true;
+				if(Xspeed < 0 ) 
+					return false;
+
+				return true;
+			}
+						
+	}
+	return false;
+
 	}
 
 	/**

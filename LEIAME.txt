@@ -1,0 +1,11 @@
+Sara Leticia Santos Silva 14677190
+
+Comandos do makefile:
+  Para compilar:
+    make build
+
+  Para rodar:
+    make run 
+
+ Comandos do arquivo json para vscode:
+    Para compilar e rodar em modo debug é necessário usar a tecla f5

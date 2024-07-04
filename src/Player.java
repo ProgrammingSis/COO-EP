@@ -12,8 +12,9 @@ public class Player {
 	private double cy;
 	private double width;
 	private double height;
-	private double velocidade;
+	private double speed;
 	private String id;
+	private double[] v_limit;
 
 	/**
 		Construtor da classe Player.
@@ -33,8 +34,9 @@ public class Player {
 		this.width = width;
 		this.height = height;
 		this.id = id;
-		this.velocidade = speed;
+		this.speed = speed;
 		this.color = color;
+		this.v_limit = v_limit;
 
 	}
 
@@ -58,7 +60,9 @@ public class Player {
 
 	public void moveUp(long delta){
 		//mover para baixo deve ser diminuir o y com o tempo definido pelo delta
-		this.cy = this.cy + (delta * this.velocidade);
+		if(cy > v_limit[0]+ (height/2) + 2){
+			this.cy = this.cy - (delta * this.speed);
+		}
 	}
 
 	/**
@@ -68,11 +72,11 @@ public class Player {
 
 		@param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
 	*/
-
 	public void moveDown(long delta){
- 		//mover para baixo deve ser diminuir o y com o tempo definido pelo delta
-
-		this.cy = this.cy - (delta * this.velocidade);
+ 		//mover para baixo é diminuir a coordenada y com o tempo definido pelo delta
+		 if(cy < v_limit[1]- (height/2) - 2){
+			this.cy = this.cy + (delta * this.speed);
+		 }
 	}
 
 	/**
@@ -89,7 +93,6 @@ public class Player {
 		Método que devolve a largura do retangulo que representa o player.
 		return um double com o valor da largura.
 	*/
-
 	public double getWidth() { 
 		//field_width???
 		return width;
@@ -99,7 +102,6 @@ public class Player {
 		Método que devolve a algura do retangulo que representa o player.
 		return um double com o valor da altura.
 	*/
-
 	public double getHeight() { 
 
 		return height;
@@ -109,7 +111,6 @@ public class Player {
 		Método que devolve a coordenada x do centro do retangulo que representa o player.
 		return o valor double da coordenada x.
 	*/
-
 	public double getCx() { 
 		
 		return cx;
@@ -119,7 +120,6 @@ public class Player {
 		Método que devolve a coordenada y do centro do retangulo que representa o player.
 		return o valor double da coordenada y.
 	*/
-
 	public double getCy() { 
 	
 		return cy;

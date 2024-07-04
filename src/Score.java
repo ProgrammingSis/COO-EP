@@ -1,15 +1,14 @@
-
-
 import java.awt.*;
+
+import javax.swing.plaf.basic.BasicColorChooserUI.PropertyHandler;
 
 /**
 	Esta classe representa um placar no jogo. A classe princial do jogo (Pong)
 	instancia dois objeto deste tipo, cada um responsável por gerenciar a pontuação
 	de um player, quando a execução é iniciada.
 */
-
 public class Score {
-	String idJogador;
+	private String idPlayer;
 	private int score = 0;
 
 	/**
@@ -18,15 +17,19 @@ public class Score {
 		@param playerId uma string que identifica o player ao qual este placar está associado.
 	*/
 	public Score(String playerId){
-		this.idJogador = playerId;
+		this.idPlayer = playerId;
 	}
 
 	/**
 		Método de desenho do placar.
 	*/
 	public void draw(){
-
-		GameLib.drawText(this.idJogador, 70, GameLib.ALIGN_LEFT);			
+		if(this.idPlayer.equals("Player 1")){
+			GameLib.drawText(this.idPlayer + ": "+ this.score, 70, GameLib.ALIGN_LEFT);
+		}
+		if(this.idPlayer.equals("Player 2")){
+			GameLib.drawText(this.idPlayer + ": " + this.score, 70, GameLib.ALIGN_RIGHT);
+		}		
 	}
 
 	/**
